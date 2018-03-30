@@ -1,2 +1,2 @@
-# audio_defense
-Proposed defenses against several adversarial attacks for speech to text systems
+# SML_project
+Repository for our SML course project (on adversarial attacks and defenses in audio)

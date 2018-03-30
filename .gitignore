@@ -1,3 +1,13 @@
+*.gz
+*.wav
+*.tgz
+
+models/
+models_old/
+DeepSpeech/
+commonvoice_subset/
+cv_corpus_v1/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
