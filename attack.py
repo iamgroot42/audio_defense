@@ -70,7 +70,7 @@ toks = " abcdefghijklmnopqrstuvwxyz'-"
 class Attack:
     def __init__(self, sess, loss_fn, phrase_length, max_audio_len,
                  learning_rate=10, num_iterations=5000, batch_size=1,
-                 mp3=False, l2penalty=float('inf')):
+                 l2penalty=float('inf')):
         """
         Set up the attack procedure.
 
@@ -84,7 +84,6 @@ class Attack:
         self.batch_size = batch_size
         self.phrase_length = phrase_length
         self.max_audio_len = max_audio_len
-        self.mp3 = mp3
 
         # Create all the variables necessary
         # they are prefixed with qq_ just so that we know which
@@ -192,8 +191,8 @@ class Attack:
             now = time.time()
 
             
-            # Print out some debug information every 50 iterations.
-            if i%100 == 0:
+            # Print out some debug information every 10 iterations.
+            if i%10 == 0:
                 new, delta, r_out, r_logits = sess.run((self.new_input, self.delta, self.decoded, self.logits))
                 lst = [(r_out, r_logits)]
             
@@ -233,7 +232,7 @@ class Attack:
                 # if we have (or if it's the final epoch) then we
                 # should record our progress and decrease the
                 # rescale constant.
-                if (self.loss_fn == "CTC" and i%100 == 0 and res[ii] == "".join([toks[x] for x in target[ii]])) \
+                if (self.loss_fn == "CTC" and i%10 == 0 and res[ii] == "".join([toks[x] for x in target[ii]])) \
                    or (i == MAX-1 and final_deltas[ii] is None):
                     # Get the current constant
                     rescale = sess.run(self.rescale)
@@ -259,23 +258,21 @@ class Attack:
         return final_deltas
 
 
-def init(sess, phrase, maxlen, batch_size=2, lr=100, iterations=1000, l2penalty=float('inf'), mp3=True):
+def init(sess, phrase, maxlen, batch_size=2, lr=100, iterations=1000, l2penalty=float('inf')):
     attack = Attack(sess, 'CTC', len(phrase), maxlen,
                         batch_size=batch_size,
-                        mp3=mp3,
                         learning_rate=lr,
                         num_iterations=iterations,
                         l2penalty=l2penalty)
     return attack
 
 
-def runAttacks(sess, attack, inputAudios, phrase):
+def runAttacks(sess, attack, inputAudios, phrase, maxlen):
     lengths = []
     audios = []
     for audio in inputAudios:
         lengths.append(len(audio))
         audios.append(list(audio))
-    maxlen = max(map(len,audios))
     audios = np.array([x+[0]*(maxlen-len(x)) for x in audios])    
     deltas = attack.attack(audios,
                            lengths,
@@ -303,7 +300,7 @@ def main():
     phrase = "i am a bad boy"
     maxlen = max(map(len, audios))
     print("Maximum length", maxlen)
-    attack = init(sess, phrase, maxlen, batch_size=2, lr=100, iterations=1000, l2penalty=float('inf'), mp3=True)
+    attack = init(sess, phrase, maxlen, batch_size=2, lr=100, iterations=1000, l2penalty=float('inf'))
 
     # Run attack on given audio files
     deltas = runAttacks(sess, attack, audios, phrase)

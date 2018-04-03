@@ -20,11 +20,6 @@ import sys
 from collections import namedtuple
 sys.path.append("DeepSpeech")
 
-try:
-    import pydub
-except:
-    print("pydub was not loaded, MP3 compression will not work")
-
 # Okay, so this is ugly. We don't want DeepSpeech to crash.
 # So we're just going to monkeypatch TF and make some things a no-op.
 # Sue me.
@@ -79,10 +74,11 @@ def getAudioPrediction(sess, audio):
         init(sess)
         modelInitDone = True
 
-    decoded, _ = tf.nn.ctc_beam_search_decoder(logits, lengths, merge_repeated=False, beam_width=500)
+    decoded, logprobs = tf.nn.ctc_beam_search_decoder(logits, lengths, merge_repeated=False, beam_width=500)
     length = (len(audio)-1)//320
     l = len(audio)
     r = sess.run(decoded, {new_input: [audio], lengths: [length]})
+    lp = sess.run(logprobs, {new_input: [audio], lengths: [length]})
     tts = "".join([toks[x] for x in r[0].values])    
     return tts
 

@@ -1,12 +1,15 @@
 *.gz
 *.wav
 *.tgz
+*.png
+*.txt
 
 models/
 models_old/
 DeepSpeech/
 commonvoice_subset/
 cv_corpus_v1/
+perturbed_subset/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
