@@ -3,6 +3,12 @@
 *.tgz
 *.png
 *.txt
+*.npy
+*.bin
+*.model
+*.bz2
+VCTK_dataset/*
+mansi/*
 
 models/
 models_old/
