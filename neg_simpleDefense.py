@@ -8,17 +8,23 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import confusion_matrix
 
 # Fix seed
-np.random.seed(69)
+#np.random.seed(69)
 
 def readFile(filePath, type, ratio=0.2):
 	X = []
 	Y = []
+	count = 0
 	with open(filePath) as f:
 		for line in f:
-			x = line.rstrip('\n').split(' ')
-			x  = [int(i) for i in x]
-			X.append(x)
-			Y.append(type)
+			if 1:
+				#print line
+				x = line.rstrip('\n').split(' ')
+				if x[0]!='ERROR:':
+					#print x[0]
+					x  = [int(i) for i in x]
+					X.append(x)
+					Y.append(type)
+			count+=1
 	X, Y = np.stack(X), np.stack(Y)
 	p = np.random.permutation(len(X))
 	sp = int(len(p) * ratio)
@@ -29,6 +35,7 @@ def readFile(filePath, type, ratio=0.2):
 
 def combineBoth(clean, perturbed):
 	(Xtr1, Ytr1), (Xte1, Yte1) = readFile(clean, 0)
+	print "clean done"
 	(Xtr2, Ytr2), (Xte2, Yte2) = readFile(perturbed, 1)
 	minBoth = min(len(Ytr1), len(Ytr2))
 	p = np.random.permutation(len(Ytr1))[:minBoth]
@@ -48,7 +55,7 @@ def combineBoth(clean, perturbed):
 
 
 if __name__ == "__main__":
-	(Xtr, Ytr), (Xte, Yte) = combineBoth("./zero.txt", "./one.txt")
+	(Xtr, Ytr), (Xte, Yte) = combineBoth("./neg_zero.txt", "./neg_one.txt")
 	parameters = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
 	svc = SVC()
 	clf = GridSearchCV(svc, parameters)
@@ -70,5 +77,5 @@ if __name__ == "__main__":
 	plt.ylabel('True Positive Rate')
 	plt.title('ROC curve for our defense against Carlini-CTC based attack')
 	plt.legend(loc="lower right")
-	plt.savefig('simpleROC.png')
+	plt.savefig('neg_simpleROC.png')
 	

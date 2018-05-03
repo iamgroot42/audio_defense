@@ -1,0 +1,3 @@
+[submodule "AdversarialSpeech"]
+	path = AdversarialSpeech
+	url = https://github.com/iamgroot42/AdversarialSpeech.git
