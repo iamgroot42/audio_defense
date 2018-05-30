@@ -72,11 +72,11 @@ for i in xrange(100):
         # recognize speech using Google Cloud Speech
         GOOGLE_CLOUD_SPEECH_CREDENTIALS = r"""{
           "type": "service_account",
-          "project_id": "privacy-btp-1479375866301",
-          "private_key_id": "20979e786a58f56c2fb4467b8394c98278dc8509",
-          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCZ9l9mZs/7/A1T\nOSL07zXYlYH2GFaf0nVifKGbNGHOVTRhySdCIgrGtAB8woFb8BKnz18RKZ2V+RFX\nBULwVYWcDpFD84dzc/I1gfBQTy9dA1NkP0ccaVuVlu8Dun6Gf9Wc0Ny4NzjjoRuY\nIgnD9+g6AQ5Wr3lsORJiIfumFVs+9q9ZGubftt1ewlC3zgdS1JQCjpNPZiiI3XyP\nPX3+c72yXRSlDmhY/Ey8gcXnR7RCU03l0+EdvNQr8kLEEL8aHcYgurapJzyulAo6\nPcrLZcQPqkp/bJ6VOPR1Jlxpi+XQmYyvR6Cp8RQKd664sufftYc50w/wVXuzEXzP\nbmXfNTIDAgMBAAECggEAO30dNnlyUoh885OnpKFLGnEGQrr7uYw9q/zBCrGuOuXk\nNAZfw2dY55cEezBCgG4eHzX6oyyDxb9zij6vsyIwWnCsg2d1BlCeHTukSbuW7ucK\nkTj79oflCcNEfhnQqpJ5TLrNFebMdfO5sEoyoMRIuCTRUABEN+NDbaR40h79XzGj\nNhhlgqlLIz85t0OXnHDWgA4aiwQpWhGgK1kMVdYn11IQmHlSuYD1Y6Hru5dGuT3D\nP6VQz5wflPPRlqj7n5n0TTSCt9o4nlKeA+8wFgVafMcvXMuCEwezdH0DxGl/0H1J\nHK76QPDR4+w7ePwF5ETxFijf4Va6GdlJr5oJQjTA7QKBgQDSltF/YPJbdCreAkM8\nVKy+fGcTeIvz3DOgk9HjpiDLaoKc2rUURhwD11Lc8SDmrSXIwwsJ7EtN8gCHWvNo\nG7PPYKSniou39ryXFYpg1R87p+p9m99mrJMbKZ2Oi1DLA3kI7EIKBPrNkoGqKCIV\nDTmESB3JP3q/aY9AEu/RFMeq1wKBgQC7KZSRZ2VvFPEpMoiyS3Q6Tr4bHw2PCWOM\nvlIikBA0yCKHqDMXig5hZ69MTaKBfiSsnV9rE7END+ty1DwtHnnGt9Qa2mYTC6XO\n7DduA4uCrUayOZxdJvC5wZwPcyCR3fao9I2HE5H8HX00S4CLFOVeuRhGG31AtPB7\nYF0RwLzYtQKBgC2XEQuuhUlfQNiHTN8Gxc8HR5ljg4jrpxGgbtQF5xuil1w1zPXy\np6X9O6cxXJoT6hYog39GdJcPSSYEfqWPOcIvffX3fH/7HqDmvOpxuS1FEPLYh+jG\ne6Jpw/5UEs2gltdjrnhU06cljIS144sDLeyBYFFtOLmvtJ9+egSdpwxJAoGAdpgP\nWt9Qh8WWVkt+ELP9DuFMVrUji0oguVLzipEMo9VZA+qRjU3edNwVWN0spq7+oB4M\nEzZkDunSgG15QAG6mi9riCRxX4oW43oMWXqHkSMo08/rg58kFCBZOfTyY1tpa3+i\nmj/NVhp9doCNEBQKjy3r8qiCgljktNjHwHMHdq0CgYAJn2GaEXRTg88Q+GzaqswP\nMY1WU1B8/LhAvGZkWGI624fNaTJVFPQf0ywZsTbDAHtvlmqtZfs9HsANUfSSK1KG\nHktvwxNADgSBiMkt3X++RPD/RK7MbLibW8ZZvk90OUSrTkWKC2f87881ewwj3f4F\nt8VQ4ACpv1gUPsGQ+HLCzQ==\n-----END PRIVATE KEY-----\n",
-          "client_email": "333660242266-compute@developer.gserviceaccount.com",
-          "client_id": "102052380341366200607",
+          "project_id": "ENTER PROJECT ID",
+          "private_key_id": "ENTER ID HERE",
+          "private_key": "ENTER KEY HERE",
+          "client_email": "ENTER CLIENT EMAIL",
+          "client_id": "ENTER CLIENT ID",
           "auth_uri": "https://accounts.google.com/o/oauth2/auth",
           "token_uri": "https://accounts.google.com/o/oauth2/token",
           "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
@@ -93,7 +93,7 @@ for i in xrange(100):
             print("Could not request results from Google Cloud Speech service; {0}".format(e))
 
         # recognize speech using Wit.ai
-        WIT_AI_KEY = "ZRUWV7QVCTXD2INFMA7HV6JFM7YAUAQF"  # Wit.ai keys are 32-character uppercase alphanumeric strings
+        WIT_AI_KEY = "ENTER KEY HERE"  # Wit.ai keys are 32-character uppercase alphanumeric strings
         try:
             prediction_wit = r.recognize_wit(audio, key=WIT_AI_KEY)
             print("Wit.ai thinks you said " + prediction_wit)
@@ -105,7 +105,7 @@ for i in xrange(100):
             print("Could not request results from Wit.ai service; {0}".format(e))
 
         # recognize speech using Microsoft Bing Voice Recognition
-        BING_KEY = "2b6c9511608a49eb9d9c249851837fc9"  # Microsoft Bing Voice Recognition API keys 32-character lowercase hexadecimal strings
+        BING_KEY = "ENTER KEY HERE"  # Microsoft Bing Voice Recognition API keys 32-character lowercase hexadecimal strings
         try:
             prediction_bing = r.recognize_bing(audio, key=BING_KEY)
             print("Microsoft Bing Voice Recognition thinks you said " + prediction_bing)
@@ -117,8 +117,8 @@ for i in xrange(100):
             print("Could not request results from Microsoft Bing Voice Recognition service; {0}".format(e))
 
         # recognize speech using Houndify
-        # HOUNDIFY_CLIENT_ID = "pvHBCo3qjsF19lKPZsuGDw=="  # Houndify client IDs are Base64-encoded strings
-        # HOUNDIFY_CLIENT_KEY = "XaqOyvaXa6q7TfvY9eEy9bmlELX13zi_HMolTAT2OUN5PJY5KKTpO92i1A8gT3katPvLFHarX5AArGZqAcZSIQ=="  # Houndify client keys are Base64-encoded strings
+        # HOUNDIFY_CLIENT_ID = "ENTER ID HERE"  # Houndify client IDs are Base64-encoded strings
+        # HOUNDIFY_CLIENT_KEY = "ENTER KEY HERE"  # Houndify client keys are Base64-encoded strings
         # try:
         #     prediction_houndify = r.recognize_houndify(audio, client_id=HOUNDIFY_CLIENT_ID, client_key=HOUNDIFY_CLIENT_KEY)
         #     print("Houndify thinks you said " + prediction_houndify)
@@ -130,8 +130,8 @@ for i in xrange(100):
         #     print("Could not request results from Houndify service; {0}".format(e))
 
         # recognize speech using IBM Speech to Text
-        IBM_USERNAME = "ac8f6b68-68c3-44a5-a522-60d9729b2889"  # IBM Speech to Text usernames are strings of the form XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-        IBM_PASSWORD = "tE14z2c5aNPH"  # IBM Speech to Text passwords are mixed-case alphanumeric strings
+        IBM_USERNAME = "ENTER USERNAME"  # IBM Speech to Text usernames are strings of the form XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+        IBM_PASSWORD = "ENTER PASSWORD"  # IBM Speech to Text passwords are mixed-case alphanumeric strings
         try:
             prediction_IBM = r.recognize_ibm(audio, username=IBM_USERNAME, password=IBM_PASSWORD)
             print("IBM Speech to Text thinks you said " + prediction_IBM)
